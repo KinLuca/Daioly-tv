@@ -17,12 +17,13 @@ sub Init()
   URLs = [
     ' Uncomment this line to simulate a bad request and make the dialog box appear
     ' "bad request",
-    "http://devtools.web.roku.com/samples/sample_content.rss",
-    "http://devtools.web.roku.com/samples/sample_content.rss",
-    "http://devtools.web.roku.com/samples/sample_content.rss",
-    "http://devtools.web.roku.com/samples/sample_content.rss"
+    "https://daioly.com/wp-json/tv/roku/",
+    "https://daioly.com/wp-json/tv/roku/",
+    "https://daioly.com/wp-json/tv/roku/",
+    "https://daioly.com/wp-json/tv/roku/"
+  
   ]
-  makeRequest(URLs,"Parser")
+  makeRequest(URLs,"JsonParser")
 
   'Create observer events for when content is loaded
   m.top.observeField("visible", "onVisibleChange")

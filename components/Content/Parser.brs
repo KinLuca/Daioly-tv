@@ -56,15 +56,15 @@ sub parseResponse()
   'For the 3 rows before the "grid"
   list = [
     {
-        Title:"Big Hits"
+        Title:"Travel"
         ContentList : result
     }
     {
-        Title:"Action"
+        Title:"XGames"
         ContentList : result
     }
     {
-        Title:"Drama"
+        Title:"Street Art"
         ContentList : result
     }
   ]
