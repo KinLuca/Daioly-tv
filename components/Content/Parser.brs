@@ -19,10 +19,10 @@ sub parseResponse()
 
   ' Combine all content arrays
   combinedItems = []
-  if jsonData.movies <> invalid then combinedItems.append(jsonData.movies)
-  if jsonData.shortFormVideos <> invalid then combinedItems.append(jsonData.shortFormVideos)
-  if jsonData.series <> invalid then combinedItems.append(jsonData.series)
-  if jsonData.tvSpecials <> invalid then combinedItems.append(jsonData.tvSpecials)
+  if jsonData.movies <> invalid then combinedItems.appendAll(jsonData.movies)
+  if jsonData.shortFormVideos <> invalid then combinedItems.appendAll(jsonData.shortFormVideos)
+  if jsonData.series <> invalid then combinedItems.appendAll(jsonData.series)
+  if jsonData.tvSpecials <> invalid then combinedItems.appendAll(jsonData.tvSpecials)
 
   result = []
   

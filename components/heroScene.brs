@@ -17,13 +17,15 @@ sub init()
   m.FadeOut = m.top.findNode("FadeOut")
   ' Set focus to the scene
   m.top.setFocus(true)
+  m.top.ObserveField("content", "OnChangeContent")
 end sub
 
 ' Hero Grid Content handler fucntion. If content is set, stops the
 ' loadingIndicator and focuses on GridScreen.
 sub OnChangeContent()
   'print "HeroScene.brs - [OnChangeContent]"
-  m.loadingIndicator.control = "stop"
+  m.LoadingIndicator.control = "stop"
+  m.LoadingIndicator.visible = "false"
   if m.top.content <> invalid
     'Warn the user if there was a bad request
     if m.top.numBadRequests > 0
