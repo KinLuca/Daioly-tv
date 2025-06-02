@@ -165,14 +165,14 @@ function addRequest(request as Object) as Boolean
             }
           else
             print "Error: request couldn't be issued"
-            m.top.numBadRequests += 1
-            m.top.numRowsReceived += 1
+            m.top.numBadRequests++
+            m.top.numRowsReceived++
           end if
   		    print "Initiating transfer '"; idkey; "' for URI '"; uri; "'"; " succeeded: "; ok
         else
           print "Error: invalid uri: "; uri
           m.top.numBadRequests++
-          m.top.numRowsReceived += 1
+          m.top.numRowsReceived++
   			end if
       else
         print "Error: parameters is the wrong type: " + type(parameters)
