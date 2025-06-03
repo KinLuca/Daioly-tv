@@ -31,7 +31,14 @@ sub parseResponse()
 
         video = content.videos[0]
 
-        item = itemData
+        item = {}
+        item.guid = itemData.id
+        item.link = video.url
+        item.title = itemData.title
+        item.description = itemData.shortDescription
+        ' item.content_html = itemData.longDescription
+        ' item.summary = itemData.longDescription
+        item.pubDate = itemData.releaseDate
         item.stream = {url: video.url}
         item.url = video.url
         item.streamformat = LCase(video.videoType)

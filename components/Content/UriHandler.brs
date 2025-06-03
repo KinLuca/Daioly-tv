@@ -89,26 +89,12 @@ sub go()
     print "Received event type '"; mt; "'"
     ' If a request was made
     if mt = "roSGNodeEvent"
-      fieldName = msg.getField()
-      if fieldName = "request"
+      if msg.getField()="request"
         if addRequest(msg.getData()) <> true then print "Invalid request"
-      else if fieldName = "ContentCache"
-        updateContent()
-      else if fieldName = "parseContent"
-        ' This event comes from the Parser node
-        parsedContent = msg.getData()
-        ' Cache this parsed content by its row number
-        rowNum = parsedContent.num ' Assume your ContentNode has num field set for this row
-
-        if rowNum <> invalid
-          m.top.contentCache.setField(rowNum.toStr(), parsedContent)
-        else
-          print "Warning: parsedContent node missing num field"
-        end if
-        ' Update overall content state
+      else if msg.getField()="ContentCache"
         updateContent()
       else
-        print "Error: unrecognized field '"; fieldName ; "'"
+        print "Error: unrecognized field '"; msg.getField() ; "'"
       end if
     ' If a response was received
     else if mt="roUrlEvent"
@@ -165,14 +151,11 @@ function addRequest(request as Object) as Boolean
             }
           else
             print "Error: request couldn't be issued"
-            m.top.numBadRequests++
-            m.top.numRowsReceived++
           end if
   		    print "Initiating transfer '"; idkey; "' for URI '"; uri; "'"; " succeeded: "; ok
         else
           print "Error: invalid uri: "; uri
           m.top.numBadRequests++
-          m.top.numRowsReceived++
   			end if
       else
         print "Error: parameters is the wrong type: " + type(parameters)
