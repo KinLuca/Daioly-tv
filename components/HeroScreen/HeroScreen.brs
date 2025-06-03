@@ -52,11 +52,6 @@ end sub
 
 ' observer function to handle when content loads
 sub onContentChanged()
-  if m.UriHandler.content = invalid
-    print "Content is INVALID"
-  else
-    print "Loaded content: "; m.UriHandler.content.count(); " rows"
-  end if
   'print "HeroScreen.brs - [onContentChanged]"
   m.top.numBadRequests = m.UriHandler.numBadRequests
   m.top.content = m.UriHandler.content

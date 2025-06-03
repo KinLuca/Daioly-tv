@@ -8,21 +8,18 @@ end sub
 ' The parsing logic will be different for different RSS feeds
 sub parseResponse()
   print "Parser.brs - [parseResponse]"
-
-  str = m.top.response.content
+  jsonstr = m.top.response.content
   num = m.top.response.num
 
-  if str = invalid return
+  if jsonstr = invalid return
 
-  jsonData = ParseJSON(str)
-  if jsonData = invalid return
+  jsonData = ParseJSON(jsonstr)
+  if type(jsonData) <> "roAssociativeArray" return
 
   ' Combine all content arrays
   combinedItems = []
-  if jsonData.movies <> invalid then combinedItems.appendAll(jsonData.movies)
-  if jsonData.shortFormVideos <> invalid then combinedItems.appendAll(jsonData.shortFormVideos)
-  if jsonData.series <> invalid then combinedItems.appendAll(jsonData.series)
-  if jsonData.tvSpecials <> invalid then combinedItems.appendAll(jsonData.tvSpecials)
+  if jsonData.movies <> invalid then combinedItems.Concat(jsonData.movies)
+  if jsonData.shortFormVideos <> invalid then combinedItems.Concat(jsonData.shortFormVideos)
 
   result = []
   
@@ -30,24 +27,21 @@ sub parseResponse()
     if itemData <> invalid 
 
       content = itemData.content
-      if content <> invalid and content.videos.count() > 0 
+      if content <> invalid and content.videos.Count() > 0 
 
         video = content.videos[0]
 
-        item = {}
-        item.Title = itemData.title
-        item.Description = itemData.shortDescription
+        item = itemData
+        item.stream = {url: video.url}
         item.url = video.url
         item.streamformat = LCase(video.videoType)
         item.hdposterurl = itemData.thumbnail
-        item.length = content.duration
-        item.ReleaseDate = itemData.releaseDate
-        item.Genres = itemData.genres
-        item.Tags = itemData.tags
+        item.hdbackgroundimageurl = itemData.thumbnail
+        item.uri = itemData.thumbnail
 
-        result.push(item)
-      endif
-    endif
+        result.Push(item)
+      end if
+    end if
   end for
 
   ' Create categories/rows from metadata
