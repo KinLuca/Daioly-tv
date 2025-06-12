@@ -31,7 +31,7 @@
     <!-- The spinning wheel for when content is loading -->
     <LoadingIndicator
       id="LoadingIndicator"
-      imageUri="pkg:/components/LoadingIndicator/loader.png"
+      imageUri="pkg:/images/loader.png"
       clockwise="true"
       spinInterval="2"
       fadeInterval="0.5"
@@ -107,6 +107,6 @@
     <field id="rowItemSelected" type="intarray" alias="HeroScreen.rowItemSelected" alwaysNotify="true" onChange="OnRowItemSelected" />
   </interface>
 
-  <script type="text/brightscript" uri="pkg:/components/heroScene.brs" />
+  <script type="text/brightscript" uri="pkg:/components/HeroScene.brs" />
 
 </component>

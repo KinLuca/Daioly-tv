@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2016 Roku Corp.  All Rights Reserved. -->
 
-<component name="customItem" extends="Group">
+<component name="CustomItem" extends="Group">
 
   <interface>
     <field id="width"       type="float" onChange="updateLayout"/>
@@ -14,5 +14,5 @@
   </children>
 
     <!-- main handler -->
-    <script type="text/brightscript" uri="pkg:/components/Item/customItem.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Item/CustomItem.brs" />
 </component>

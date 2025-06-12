@@ -140,6 +140,7 @@ function addRequest(request as Object) as Boolean
           urlXfer = createObject("roUrlTransfer")
           urlXfer.setUrl(uri)
           urlXfer.setPort(m.port)
+          urlXfer.setCertificatesFile("common:/certs/ca-bundle.crt")
           ' should transfer more stuff from parameters to urlXfer
           idKey = stri(urlXfer.getIdentity()).trim()
           ' AsyncGetToString returns false if the request couldn't be issued
