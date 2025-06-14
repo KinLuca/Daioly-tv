@@ -53,8 +53,8 @@ sub parseResponse()
 
   ' Create categories/rows from metadata
   list = [
+    { Title: "Los Angeles", ContentList: result }
     { Title: "Travel", ContentList: result }
-    { Title: "XGames", ContentList: result }
     { Title: "Street Art", ContentList: result }
   ]
 
