@@ -18,8 +18,8 @@ sub parseResponse()
 
   ' Combine all content arrays
   combinedItems = []
-  if jsonData.movies <> invalid then combinedItems.Concat(jsonData.movies)
-  if jsonData.shortFormVideos <> invalid then combinedItems.Concat(jsonData.shortFormVideos)
+  if jsonData.movies <> invalid then combinedItems.append(jsonData.movies)
+  if jsonData.shortFormVideos <> invalid then combinedItems.append(jsonData.shortFormVideos)
 
   result = []
   
