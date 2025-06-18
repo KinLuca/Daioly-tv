@@ -58,6 +58,7 @@ sub updateContent()
       end if
     end for
     print "All content has finished loading"
+
     m.top.contentSet = true
     m.top.content = parent
   else

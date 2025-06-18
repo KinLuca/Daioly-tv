@@ -22,30 +22,29 @@ sub parseResponse()
   if jsonData.shortFormVideos <> invalid then combinedItems.append(jsonData.shortFormVideos)
 
   result = []
-  
   for each itemData in combinedItems
-    if itemData <> invalid 
+    if itemData <> invalid
 
       content = itemData.content
-      if content <> invalid and content.videos.Count() > 0 
+      if content <> invalid and content.videos.Count() > 0
 
         video = content.videos[0]
 
-        item = {}
-        item.guid = itemData.id
-        item.link = video.url
-        item.title = itemData.title
-        item.description = itemData.shortDescription
-        ' item.content_html = itemData.longDescription
-        ' item.summary = itemData.longDescription
-        item.pubDate = itemData.releaseDate
-        item.stream = {url: video.url}
-        item.url = video.url
-        item.streamformat = LCase(video.videoType)
-        item.hdposterurl = itemData.thumbnail
-        item.hdbackgroundimageurl = itemData.thumbnail
-        item.uri = itemData.thumbnail
-
+        item = createObject("RoSGNode", "ContentNode")
+        fields = {
+          guid: itemData.id
+          title: itemData.title
+          description: itemData.shortDescription
+          ' content_html: itemData.longDescription
+          ' summary: itemData.longDescription
+          pubDate: itemData.releaseDate
+          url: video.url
+          streamformat: LCase(video.videoType)
+          hdposterurl: itemData.thumbnail
+          hdbackgroundimageurl: itemData.thumbnail
+          uri: itemData.thumbnail
+        }
+        AddAndSetFields(item, fields)
         result.Push(item)
       end if
     end if
@@ -75,17 +74,14 @@ sub parseResponse()
   end if
 end sub
 
-
 'Create a row of content
-function createRow(list as object, num as Integer)
+function createRow(list as object, num as integer)
   print "Parser.brs - [createRow]"
   Parent = createObject("RoSGNode", "ContentNode")
   row = createObject("RoSGNode", "ContentNode")
   row.Title = list[num].Title
-  for each itemAA in list[num].ContentList
-    item = createObject("RoSGNode","ContentNode")
-    AddAndSetFields(item, itemAA)
-    row.appendChild(item)
+  for each itemNode in list[num].ContentList
+    row.appendChild(itemNode)
   end for
   Parent.appendChild(row)
   return Parent
@@ -97,18 +93,15 @@ end function
 'should be in the grid.
 function createGrid(list as object)
   print "Parser.brs - [createGrid]"
-  Parent = createObject("RoSGNode","ContentNode")
+  Parent = createObject("RoSGNode", "ContentNode")
   for i = 0 to list.count() step 4
-    row = createObject("RoSGNode","ContentNode")
+    row = createObject("RoSGNode", "ContentNode")
     if i = 0
       row.Title = "The Grid"
     end if
     for j = i to i + 3
-      if list[j] <> invalid
-        item = createObject("RoSGNode","ContentNode")
-        AddAndSetFields(item,list[j])
-        row.appendChild(item)
-      end if
+      itemNode = list[j]
+      if itemNode <> invalid then row.appendChild(itemNode)
     end for
     Parent.appendChild(row)
   end for
