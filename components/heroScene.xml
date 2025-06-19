@@ -113,6 +113,7 @@
   </interface>
 
   <script type="text/brightscript" uri="pkg:/components/utils/NodeUtils.brs" />
+  <script type="text/brightscript" uri="pkg:/components/analytics/SignalBeacon.brs" />
   <script type="text/brightscript" uri="pkg:/components/deepLinking/DeepLinking.brs" />
   <script type="text/brightscript" uri="pkg:/components/HeroScene.brs" />
 

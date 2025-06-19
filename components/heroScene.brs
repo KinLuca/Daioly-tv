@@ -3,6 +3,7 @@
 ' 1st function that runs for the scene on channel startup
 sub init()
   m.global = {
+    appLaunchComplete: false
     deepLinking: getInitialDeepLinking()
   }
 
@@ -58,17 +59,23 @@ sub handleDeepLinking(itemContent as object)
   m.detailsScreen.setFocus(true)
   m.detailsScreen.visible = "true"
   m.detailsScreen.itemSelected = 0
+  
+  appLaunchComplete()
 end sub
 
 sub handleContent()
   'Warn the user if there was a bad request
-  if m.top.numBadRequests > 0
+  if m.top.numBadRequests > -1
     m.HeroScreen.visible = "true"
     m.WarningDialog.visible = "true"
     m.WarningDialog.message = (m.top.numBadRequests).toStr() + " request(s) for content failed. Press '*' or OK or '<-' to continue."
+    
+    appDialogInitiate()
   else
     m.HeroScreen.visible = "true"
     m.HeroScreen.setFocus(true)
+    
+    appLaunchComplete()
   end if
 end sub
 
@@ -82,6 +89,7 @@ sub OnChangeContent(event as object)
     setContent(m.content)
   else
     m.WarningDialog.visible = "true"
+    appDialogInitiate()
   end if
 end sub
 
@@ -109,6 +117,8 @@ function onKeyEvent(key as string, press as boolean) as boolean
         m.WarningDialog.visible = "false"
         m.HeroScreen.setFocus(true)
         result = true
+
+        appDialogComplete()
         ' if Details opened
       else if m.HeroScreen.visible = false and m.DetailsScreen.videoPlayerVisible = false
         m.FadeOut.control = "start"
@@ -126,11 +136,15 @@ function onKeyEvent(key as string, press as boolean) as boolean
       if m.WarningDialog.visible = true
         m.WarningDialog.visible = "false"
         m.HeroScreen.setFocus(true)
+
+        appDialogComplete()
       end if
     else if key = "options"
       print "------ [options pressed] ------"
       m.WarningDialog.visible = "false"
       m.HeroScreen.setFocus(true)
+      
+      appDialogComplete()
     end if
   end if
   return result
