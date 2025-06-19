@@ -1,10 +1,15 @@
 # Daioly Manifest File
 
+# Attributes
+supports_input_launch=1
+
+# Channel Details
 title=Daioly
 major_version=1
 minor_version=0
 build_version=00001
 
+# Channel Assets
 mm_icon_focus_fhd=pkg:/images/channel-poster_fhd.png
 mm_icon_focus_hd=pkg:/images/channel-poster_hd.png
 mm_icon_focus_sd=pkg:/images/channel-poster_sd.png
@@ -16,4 +21,5 @@ splash_screen_sd=pkg:/images/splash-screen_sd.jpg
 splash_color=#000000
 splash_min_time=1
 
+# Resolution
 ui_resolutions=fhd

@@ -3,6 +3,10 @@
 <!-- Copyright 2016 Roku Corp.  All Rights Reserved. -->
 
 <component name="HeroScene" extends="Scene" >
+  <interface>
+    <function name="setInputArgs" />
+    <function name="setLaunchArgs" />
+  </interface>
 
   <children>
     <!-- RowList on HeroScene -->
@@ -13,6 +17,7 @@
 
     <!-- Overhang Node -->
     <Overhang
+      logoUri="pkg:/images/overhangLogo.png"
       showClock="true"
       title="Daioly" />
 
@@ -107,6 +112,9 @@
     <field id="rowItemSelected" type="intarray" alias="HeroScreen.rowItemSelected" alwaysNotify="true" onChange="OnRowItemSelected" />
   </interface>
 
+  <script type="text/brightscript" uri="pkg:/components/utils/NodeUtils.brs" />
+  <script type="text/brightscript" uri="pkg:/components/analytics/SignalBeacon.brs" />
+  <script type="text/brightscript" uri="pkg:/components/deepLinking/DeepLinking.brs" />
   <script type="text/brightscript" uri="pkg:/components/HeroScene.brs" />
 
 </component>
